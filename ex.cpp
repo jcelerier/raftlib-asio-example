@@ -100,16 +100,9 @@ class sender
         request[n++] = 0;
         request[n++] = 0;        
         
-        union{
-            int32_t i;
-            char c[4];
-        } u;
-        u.i = m.value;
-
-        request[n + 3] = u.c[0];
-        request[n + 2] = u.c[1];
-        request[n + 1] = u.c[2];
-        request[n + 0] = u.c[3];
+        auto v = htonl(m.value);
+        auto v_p = reinterpret_cast<const char*>(&v);
+        std::copy_n(v_p, 4, request + n);
         
         for(int i = 0; i < n + 8; i ++)
             std::cerr << ( request[i] < 32 ? '$' : request[i] )<< " ";
