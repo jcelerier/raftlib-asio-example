@@ -1,0 +1,10 @@
+This supposes that RaftLib is cloned in this folder and bult in a raftlib-build directory.
+
+In multiple shells : 
+
+    $ python2 python_send.py
+
+    $ python2 python_receive.py
+
+    $ cmake . && cmake --build . && ./example
+
